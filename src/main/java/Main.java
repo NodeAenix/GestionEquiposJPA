@@ -14,20 +14,51 @@ public class Main {
     static final EntityTransaction transaction = entityManager.getTransaction();
 
     public static void main(String[] args) {
+        // Creamos un equipo
         Equipo equipo = new Equipo();
-        equipo.setId(2);
         equipo.setNombre("Barça");
         equipo.setEstadio("Camp Nou");
 
+        // Creamos un jugador
         Jugador jugador = new Jugador();
         jugador.setNombre("Lamine");
         jugador.setEstatura(168f);
         jugador.setPeso(68f);
         jugador.setIdEquipo(equipo);
 
-        // Hacer las pruebas aquí:
+        // Añadimos cada dato
+        System.out.println("> Añadiendo datos...");
+        addEquipo(equipo);
+        addJugador(jugador);
 
-        // ---
+        // Obtenemos cada dato
+        System.out.println("\n> Datos añadidos:");
+        System.out.println("EQUIPOS: " + getAllEquipos());
+        System.out.println("JUGADORES: " + getAllJugadores());
+
+        // Actualizamos cada dato
+        System.out.println("\n> Actualizando datos...");
+        equipo.setNombre("Real Madrid");
+        equipo.setEstadio("Bernabéu");
+        jugador.setNombre("Vinícius");
+        jugador.setEstatura(170f);
+        jugador.setPeso(70f);
+        updateEquipo(equipo);
+        updateJugador(jugador);
+
+        // Mostramos cada dato actualizado
+        System.out.println("\n> Datos actualizados:");
+        System.out.println("EQUIPOS: " + getAllEquipos());
+        System.out.println("JUGADORES: " + getAllJugadores());
+
+        // Borramos los datos
+        System.out.println("\n> Borrando datos...");
+        deleteEquipo(equipo); // el jugador será borrado directamente al borrar el equipo
+        System.out.println("\n> Datos borrados!");
+        System.out.println("EQUIPOS... " + getAllEquipos());
+        System.out.println("JUGADORES... " + getAllJugadores());
+
+        // Cerramos los recursos correspondientes
         closeEntityManagerAndFactory();
     }
 
